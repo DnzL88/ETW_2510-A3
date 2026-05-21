@@ -1,15 +1,15 @@
 install.packages("readxl")
 install.packages("dplyr")
 install.packages("tseries")
-install.packages("ADRL")
+install.packages("ARDL")
 install.packages("ggplot2")
 library(readxl)
 library(dplyr)
 library(tseries)
 library(urca)
 library(ggplot2)
-library(ADRL)
-data <- read_excel("ETW2510_A3 dataset.xlsx", sheet = "Time-Series Data")
+library(ARDL)
+data <- read_excel("ETW2510_A3 dataset change.xlsx", sheet = "Time-Series Data")
 head(data)
 str(data)
 data_clean <- data %>%
@@ -85,6 +85,7 @@ auto_result <- auto_ardl(
   DI ~ GDP + UNEMP + PCE + TRANSFER,
   data      = data_clean,
   max_order = c(4, 4, 4, 4, 4),
+  # Using BIC yields higher F-test, yet AIC is already significant.
   selection = "AIC"
 )
 
