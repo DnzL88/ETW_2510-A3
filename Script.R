@@ -12,18 +12,30 @@ library(ARDL)
 data <- read_excel("Dataset.xlsx", sheet = "Time-Series Data")
 head(data)
 str(data)
+
+#---Clean Columns---
 data_clean <- data %>%
   select(date, DI, GDP, UNEMP, PCE, TRANSFER)
+  mutate(
+    DI       = log(DI),
+    GDP      = log(GDP),
+    PCE      = log(PCE),
+    TRANSFER = log(TRANSFER)
+    # UNEMP is NOT logged — rates are never log-transformed
+  )
+  
 head(data_clean)
 summary(data_clean)
 colSums(is.na(data_clean))
+
+#---Convert to Time Series Object---
 DI_ts <- ts(data_clean$DI, frequency = 4, start = c(1951, 4))
 GDP_ts <- ts(data_clean$GDP, frequency = 4, start = c(1951, 4))
 UNEMP_ts <- ts(data_clean$UNEMP, frequency = 4, start = c(1951, 4))
 PCE_ts <- ts(data_clean$PCE, frequency = 4, start = c(1951, 4))
 TRANSFER_ts <- ts(data_clean$TRANSFER, frequency = 4, start = c(1951, 4))
 
-# ADF tests at level
+#---ADF tests at level---
 adf.test(DI_ts)
 adf.test(GDP_ts)
 adf.test(UNEMP_ts)
