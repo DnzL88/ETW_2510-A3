@@ -9,7 +9,7 @@ library(tseries)
 library(urca)
 library(ggplot2)
 library(ARDL)
-data <- read_excel("ETW2510_A3 dataset change.xlsx", sheet = "Time-Series Data")
+data <- read_excel("Dataset.xlsx", sheet = "Time-Series Data")
 head(data)
 str(data)
 data_clean <- data %>%
