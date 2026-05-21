@@ -120,3 +120,16 @@ cat("\nInterpretation guide:\n")
 cat("  F > Upper bound (I(1)) --> Reject H0: cointegration EXISTS\n")
 cat("  F < Lower bound (I(0)) --> Fail to reject H0: no cointegration\n")
 cat("  F between bounds       --> Inconclusive\n\n")
+
+# --- Extract UECM (Unrestricted ECM) ---
+uecm_model <- uecm(best_model)
+summary(uecm_model)
+
+# --- Extract Restricted ECM ---
+recm_model <- recm(best_model, case = 3)
+summary(recm_model)
+
+# ---Error Correction Term---
+cat("\nInterpretation guide:\n")
+cat("\nECT must be: negative + statistically significant\n")
+cat("\nIf positive or insignificant → no valid adjustment mechanism\n")
