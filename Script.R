@@ -113,7 +113,7 @@ print(bounds_result)
 
 # Pesaran et al. (2001) critical values (k = 4):
 #   - Lower bound (I(0)): 3.79-4.05
-#   - Upper bound (I(1)): 4.85-5.20
+#   - Upper bound (I(1)): 4.85-5.20 
 
 cat("\nInterpretation guide:\n")
 cat("  F > Upper bound (I(1)) --> Reject H0: cointegration EXISTS\n")
