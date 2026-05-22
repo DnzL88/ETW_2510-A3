@@ -15,7 +15,7 @@ str(data)
 
 #---Clean Columns---
 data_clean <- data %>%
-  select(date, DI, GDP, UNEMP, PCE, TRANSFER)
+  select(date, DI, GDP, UNEMP, PCE, TRANSFER) %>%
   mutate(
     DI       = log(DI),
     GDP      = log(GDP),
