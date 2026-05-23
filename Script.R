@@ -10,6 +10,9 @@ library(tseries)
 library(urca)
 library(ggplot2)
 library(ARDL)
+library(tidyverse)
+library(lmtest)
+library(strucchange)
 
 data <- read_excel("Dataset.xlsx", sheet = "Time-Series Data")
 head(data)
@@ -185,8 +188,14 @@ print(bg4)
 cat("\n--- OLS with HAC (Newey-West) standard errors ---\n")
 coeftest(model_lm, vcov. = vcovHAC)
 
+
+se_ols  <- sqrt(diag(vcov(model_lm)))
+se_hac  <- sqrt(diag(vcovHAC(model_lm)))
+round(cbind(OLS = se_ols, HAC = se_hac), 3)
+
 #Ljung box test
 Box.test(resid(model_lm), lag = 4, type = "Ljung-Box")
+
 
 #--Breusch Pagan Test for heteroskedasticity
 bp <- bptest(model_lm)
@@ -196,3 +205,11 @@ print(bp)
 cat("Decision:", ifelse(bp$p.value > 0.05,
     "p > 0.05 -- PASS: No evidence of heteroskedasticity.\n\n",
     "p < 0.05 -- FAIL: Heteroskedasticity detected. Consider HC-robust SEs.\n\n"))
+
+#Visualisaing the residuals to check if there exists heteroskedasticity.
+ggplot(data = data.frame(fitted = fitted(model_lm), resid = resid(model_lm)),
+       aes(x = fitted, y = resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0, color = "red", linetype = "dashed") +
+  theme_minimal() +
+  labs(title = "Residuals vs Fitted Values", x = "Fitted Values", y = "Residuals")
