@@ -148,3 +148,51 @@ summary(recm_model)
 cat("\nInterpretation guide:\n")
 cat("\nECT must be: negative + statistically significant\n")
 cat("\nIf positive or insignificant → no valid adjustment mechanism\n")
+
+#-----------------------------------------------------------------------------------------
+#Convert ARDL to lm for diagnostic testing
+model_lm <- to_lm(best_model, fix_names = TRUE)
+summary(model_lm)
+
+par(mfrow = c(1, 2))
+acf(na.omit(resid(model_lm)), lag.max = 20, main = "ACF of residuals")
+pacf(resid(model_lm), lag.max = 20, main = "PACF of residuals")
+
+#--Breusch Godfrey serial correlation lm test
+#Breusch-Godfrey test (order = 1, Chi-sq)
+bg1 <- bgtest(model_lm, order = 1)
+cat("--- (a) Breusch-Godfrey Serial Correlation Test (1 lags) ---\n")
+cat("H0: No serial correlation in residuals up to lag 1\n")
+print(bg1)
+
+bg2 <- bgtest(model_lm, order = 2)
+cat("--- (a) Breusch-Godfrey Serial Correlation Test (2 lags) ---\n")
+cat("H0: No serial correlation in residuals up to lag 2\n")
+print(bg2)
+
+#Breusch-Godfrey test (order = 4, Chi-sq)
+bg4 <- bgtest(model_lm, order = 4, type = "Chisq")
+cat("--- (a) Breusch-Godfrey Serial Correlation Test (4 lags) ---\n")
+cat("H0: No serial correlation in residuals up to lag 4\n")
+print(bg4)
+
+#Breusch-Godfrey test (order = 4, F)
+bg4 <- bgtest(model_lm, order = 4, type = "F")
+cat("--- (a) Breusch-Godfrey Serial Correlation Test (4 lags) ---\n")
+cat("H0: No serial correlation in residuals up to lag 4\n")
+print(bg4)
+
+cat("\n--- OLS with HAC (Newey-West) standard errors ---\n")
+coeftest(model_lm, vcov. = vcovHAC)
+
+#Ljung box test
+Box.test(resid(model_lm), lag = 4, type = "Ljung-Box")
+
+#--Breusch Pagan Test for heteroskedasticity
+bp <- bptest(model_lm)
+cat("--- (b) Breusch-Pagan Heteroskedasticity Test ---\n")
+cat("H0: Homoskedasticity (constant error variance)\n")
+print(bp)
+cat("Decision:", ifelse(bp$p.value > 0.05,
+    "p > 0.05 -- PASS: No evidence of heteroskedasticity.\n\n",
+    "p < 0.05 -- FAIL: Heteroskedasticity detected. Consider HC-robust SEs.\n\n"))
