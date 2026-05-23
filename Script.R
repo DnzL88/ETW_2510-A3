@@ -96,7 +96,7 @@ cat("Running auto_ardl() with AIC criterion (max order = 4)...\n\n")
 auto_result <- auto_ardl(
   DI ~ GDP + UNEMP + PCE + TRANSFER,
   data      = data_clean,
-  max_order = c(12, 12, 12, 12, 12),
+  max_order = c(4, 4, 4, 4, 4),
   # Using BIC yields higher F-test, yet AIC is already significant.
   selection = "AIC"
 )
