@@ -3,12 +3,14 @@ install.packages("dplyr")
 install.packages("tseries")
 install.packages("ARDL")
 install.packages("ggplot2")
+
 library(readxl)
 library(dplyr)
 library(tseries)
 library(urca)
 library(ggplot2)
 library(ARDL)
+
 data <- read_excel("Dataset.xlsx", sheet = "Time-Series Data")
 head(data)
 str(data)
@@ -16,6 +18,7 @@ str(data)
 #---Clean Columns---
 data_clean <- data %>%
   select(date, DI, GDP, UNEMP, PCE, TRANSFER) %>%
+  na.omit() %>%
   mutate(
     DI       = log(DI),
     GDP      = log(GDP),
@@ -23,7 +26,7 @@ data_clean <- data %>%
     TRANSFER = log(TRANSFER)
     # UNEMP is NOT logged — rates are never log-transformed
   )
-  
+
 head(data_clean)
 summary(data_clean)
 colSums(is.na(data_clean))
