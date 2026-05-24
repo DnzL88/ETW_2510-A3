@@ -160,6 +160,7 @@ summary(model_lm)
 par(mfrow = c(1, 2))
 acf(na.omit(resid(model_lm)), lag.max = 20, main = "ACF of residuals")
 pacf(resid(model_lm), lag.max = 20, main = "PACF of residuals")
+par(mfrow = c(1, 1))
 
 #--Breusch Godfrey serial correlation lm test
 #Breusch-Godfrey test (order = 1, Chi-sq)
@@ -168,9 +169,9 @@ cat("--- (a) Breusch-Godfrey Serial Correlation Test (1 lags) ---\n")
 cat("H0: No serial correlation in residuals up to lag 1\n")
 print(bg1)
 
-bg2 <- bgtest(model_lm, order = 2)
-cat("--- (a) Breusch-Godfrey Serial Correlation Test (2 lags) ---\n")
-cat("H0: No serial correlation in residuals up to lag 2\n")
+bg2 <- bgtest(model_lm, order = 3)
+cat("--- (a) Breusch-Godfrey Serial Correlation Test (3 lags) ---\n")
+cat("H0: No serial correlation in residuals up to lag 3\n")
 print(bg2)
 
 #Breusch-Godfrey test (order = 4, Chi-sq)
@@ -192,9 +193,6 @@ coeftest(model_lm, vcov. = vcovHAC)
 se_ols  <- sqrt(diag(vcov(model_lm)))
 se_hac  <- sqrt(diag(vcovHAC(model_lm)))
 round(cbind(OLS = se_ols, HAC = se_hac), 3)
-
-#Ljung box test
-Box.test(resid(model_lm), lag = 4, type = "Ljung-Box")
 
 
 #--Breusch Pagan Test for heteroskedasticity
