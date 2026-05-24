@@ -211,3 +211,42 @@ ggplot(data = data.frame(fitted = fitted(model_lm), resid = resid(model_lm)),
   geom_hline(yintercept = 0, color = "red", linetype = "dashed") +
   theme_minimal() +
   labs(title = "Residuals vs Fitted Values", x = "Fitted Values", y = "Residuals")
+
+# Jarque-Bera test for residual normality
+jarque.bera.test(resid(model_lm))
+
+# Ramsey RESET test for functional form
+resettest(model_lm)
+
+# CUSUM stability test
+cusum_test <- efp(formula(model_lm), data = model_lm$model, type = "Rec-CUSUM")
+plot(cusum_test)
+sctest(cusum_test)
+
+# MOSUM stability test as an additional stability check
+mosum_test <- efp(formula(model_lm), data = model_lm$model, type = "OLS-MOSUM")
+plot(mosum_test)
+sctest(mosum_test)
+
+# CUSUMSQ-style stability plot based on recursive residuals
+# Get recursive residuals
+rec_resid <- recresid(model_lm)
+
+# Cumulative sum of squared recursive residuals
+cusumsq_process <- cumsum(rec_resid^2) / sum(rec_resid^2)
+
+# Time index
+time_index <- seq_along(cusumsq_process) / length(cusumsq_process)
+
+# Plot CUSUMSQ process
+plot(
+  time_index, cusumsq_process,
+  type = "l",
+  lwd = 2,
+  main = "CUSUMSQ Plot Based on Recursive Residuals",
+  xlab = "Time",
+  ylab = "Cumulative Sum of Squared Recursive Residuals"
+)
+
+# Reference line
+abline(0, 1, col = "red", lty = 2)
