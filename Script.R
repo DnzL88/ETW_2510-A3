@@ -192,7 +192,7 @@ coeftest(model_lm, vcov. = vcovHAC)
 
 se_ols  <- sqrt(diag(vcov(model_lm)))
 se_hac  <- sqrt(diag(vcovHAC(model_lm)))
-round(cbind(OLS = se_ols, HAC = se_hac), 3)
+round(cbind(OLS = se_ols, HAC = se_hac), 4)
 
 
 #--Breusch Pagan Test for heteroskedasticity
