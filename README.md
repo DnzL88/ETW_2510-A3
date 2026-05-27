@@ -14,7 +14,7 @@ article: Papadimitriou, D. B. (2006). Government effects on the distribution of 
 ## Unemployment rate(% to labour)
 dataset: https://fred.stlouisfed.org/series/UNRATE
 
-article: Okun, A. M. (1962). Potential GNP: Its measurement and significance. *Proceedings of the Business and Economic Statistics Section of the American Statistical Association*, 98–104. (Links GDP, unemployment, and income).
+article: Okun, A. M. (1962). Potential GNP: Its measurement and significance. *Proceedings of the Business and Economic Statistics Section of the American Statistical Association*, 98–104. American Statistical Association.
 
 ## Disposable personal income(US$)
 dataset: https://fred.stlouisfed.org/series/DPI
@@ -28,7 +28,7 @@ dataset: https://fred.stlouisfed.org/series/B230RC0Q173SBEA
 ## GDP(US$billion)
 dataset: https://fred.stlouisfed.org/series/GDP
 
-article: Keynes, J. M. (1936). *The general theory of employment, interest, and money*. Macmillan. (Fundamental theory linking national output to household disposable income and consumption).
+article: Keynes, J. M. (1936). *The general theory of employment, interest, and money*. Macmillan.
 
 ## GDP per capita
 dataset: https://fred.stlouisfed.org/series/A939RX0Q048SBEA
