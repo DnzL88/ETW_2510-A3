@@ -185,22 +185,18 @@ cat("\nIf positive or insignificant → no valid adjustment mechanism\n")
 model_lm <- to_lm(best_model, fix_names = TRUE)
 summary(model_lm)
 
+#Correlograms of residuals
 par(mfrow = c(1, 2))
 acf(na.omit(resid(model_lm)), lag.max = 20, main = "ACF of residuals")
 pacf(resid(model_lm), lag.max = 20, main = "PACF of residuals")
 par(mfrow = c(1, 1))
 
 #--Breusch Godfrey serial correlation lm test
-#Breusch-Godfrey test (order = 1, Chi-sq)
-bg1 <- bgtest(model_lm, order = 1)
-cat("--- (a) Breusch-Godfrey Serial Correlation Test (1 lags) ---\n")
-cat("H0: No serial correlation in residuals up to lag 1\n")
-print(bg1)
-
-bg2 <- bgtest(model_lm, order = 3)
+#Breusch-Godfrey test (order = 3, Chi-sq)
+bg3 <- bgtest(model_lm, order = 3)
 cat("--- (a) Breusch-Godfrey Serial Correlation Test (3 lags) ---\n")
 cat("H0: No serial correlation in residuals up to lag 3\n")
-print(bg2)
+print(bg3)
 
 #Breusch-Godfrey test (order = 4, Chi-sq)
 bg4 <- bgtest(model_lm, order = 4, type = "Chisq")
