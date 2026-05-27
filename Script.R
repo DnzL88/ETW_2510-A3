@@ -3,6 +3,8 @@ install.packages("dplyr")
 install.packages("tseries")
 install.packages("ARDL")
 install.packages("ggplot2")
+install.packages("tidyverse")
+install.packages("strucchange")
 
 library(readxl)
 library(dplyr)
