@@ -4,18 +4,20 @@
 ## Personal Consumption Expenditure(US$billion)
 dataset: https://fred.stlouisfed.org/series/PCEC
 
-article: https://doi.org/10.2307/1925417
+article: Friend, I. (1946). Relationship Between Consumers' Expenditures, Savings, and Disposable Income. *The Review of Economics and Statistics*, 28(4), 208-215. https://doi.org/10.2307/1925417
 
 ## Federal_Government_Transfer(US$billion)
 dataset: https://fred.stlouisfed.org/series/B087RC1Q027SBEA
 
-article: https://doi.org/10.1057/9780230378605_1
+article: Papadimitriou, D. B. (2006). Government Effects on the Distribution of Income: An Overview. In: Papadimitriou, D.B. (eds) *The Distributional Effects of Government Spending and Taxation*. Palgrave Macmillan, London. https://doi.org/10.1057/9780230378605_1
 
 ## Unemployment rate(% to labour)
 dataset: https://fred.stlouisfed.org/series/UNRATE
 
+article: Okun, A. M. (1962). Potential GNP: Its Measurement and Significance. *Proceedings of the Business and Economic Statistics Section of the American Statistical Association*, 98-104. (Links GDP, unemployment, and income).
+
 ## Disposable personal income(US$)
-https://fred.stlouisfed.org/series/DPI
+dataset: https://fred.stlouisfed.org/series/DPI
 
 ## FED gold assets
 dataset: https://fred.stlouisfed.org/series/BOGZ1LM313011203Q
@@ -26,6 +28,7 @@ dataset: https://fred.stlouisfed.org/series/B230RC0Q173SBEA
 ## GDP(US$billion)
 dataset: https://fred.stlouisfed.org/series/GDP
 
-article: 
+article: Keynes, J. M. (1936). *The General Theory of Employment, Interest, and Money*. Macmillan. (Fundamental theory linking national output to household disposable income and consumption).
+
 ## GDP per capita
 dataset: https://fred.stlouisfed.org/series/A939RX0Q048SBEA
