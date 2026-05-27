@@ -20,6 +20,32 @@ data <- read_excel("Dataset.xlsx", sheet = "Time-Series Data")
 head(data)
 str(data)
 
+# Histogram for each variable to decide whether to apply log-transform
+ggplot(data, aes(x = DI)) +
+  geom_histogram(fill = "steelblue",   color = "white",     alpha = 0.8 ) +
+  labs(title = "Distribution of Disposable Income", x = "Disposable Income (US$)", y = "Count") +
+  theme_minimal()
+
+ggplot(data, aes(x = GDP)) +
+  geom_histogram(fill = "steelblue",   color = "white",     alpha = 0.8 ) +
+  labs(title = "Distribution of GDP", x = "GDP (US$ bil)", y = "Count") +
+  theme_minimal()
+
+ggplot(data, aes(x = UNEMP)) +
+  geom_histogram(fill = "steelblue",   color = "white",     alpha = 0.8 ) +
+  labs(title = "Distribution of Unemployment rate", x = "Unemployment rate (%)", y = "Count") +
+  theme_minimal()
+
+ggplot(data, aes(x = PCE)) +
+  geom_histogram(fill = "steelblue",   color = "white",     alpha = 0.8 ) +
+  labs(title = "Distribution of Personal Consumption Expenditure", x = "PCE (US$ bil)", y = "Count") +
+  theme_minimal()
+
+ggplot(data, aes(x = TRANSFER)) +
+  geom_histogram(fill = "steelblue",   color = "white",     alpha = 0.8 ) +
+  labs(title = "Distribution of Federal Government Transfer", x = "TRANSFER (US$ bil)", y = "Count") +
+  theme_minimal()
+
 #---Clean Columns---
 data_clean <- data %>%
   select(date, DI, GDP, UNEMP, PCE, TRANSFER) %>%
