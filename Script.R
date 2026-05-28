@@ -62,6 +62,27 @@ head(data_clean)
 summary(data_clean)
 colSums(is.na(data_clean))
 
+# Histogram for each variable after log-transform
+ggplot(data_clean, aes(x = DI)) +
+  geom_histogram(fill = "steelblue",   color = "white",     alpha = 0.8) +
+  labs(title = "Distribution of Disposable Income (log-transform)", x = "log(Disposable Income)", y = "Count") +
+  theme_minimal()
+
+ggplot(data_clean, aes(x = GDP)) +
+  geom_histogram(fill = "steelblue",   color = "white",     alpha = 0.8 ) +
+  labs(title = "Distribution of GDP (log-transform)", x = "log(GDP)", y = "Count") +
+  theme_minimal()
+
+ggplot(data_clean, aes(x = PCE)) +
+  geom_histogram(fill = "steelblue",   color = "white",     alpha = 0.8 ) +
+  labs(title = "Distribution of Personal Consumption Expenditure (log-transform)", x = "log(PCE)", y = "Count") +
+  theme_minimal()
+
+ggplot(data_clean, aes(x = TRANSFER)) +
+  geom_histogram(fill = "steelblue",   color = "white",     alpha = 0.8 ) +
+  labs(title = "Distribution of Federal Government Transfer (log-transform)", x = "log(TRANSFER)", y = "Count") +
+  theme_minimal()
+
 #---Convert to Time Series Object---
 DI_ts <- ts(data_clean$DI, frequency = 4, start = c(1951, 4))
 GDP_ts <- ts(data_clean$GDP, frequency = 4, start = c(1951, 4))
