@@ -170,7 +170,6 @@ print(summary(best_model))
 cat("\n--- Long-Run (Level) Coefficients ---\n")
 print(multipliers(best_model))
 
-
 # --- Bounds F-test ---
 cat("\n========= BOUNDS F-TEST FOR COINTEGRATION (Case 3) =========\n")
 cat("H0: No long-run relationship  (pi_1 = pi_2 = pi_3 = 0 in the UECM)\n")
@@ -191,6 +190,9 @@ cat("  F between bounds       --> Inconclusive\n\n")
 # --- Extract UECM (Unrestricted ECM) ---
 uecm_model <- uecm(best_model)
 summary(uecm_model)
+
+cat("\n--- Long-run Coefficients with HAC standard errors ---\n")
+print(multipliers(best_model,vcov = vcovHAC(uecm_model)))
 
 # --- Extract Restricted ECM ---
 recm_model <- recm(best_model, case = 3)
